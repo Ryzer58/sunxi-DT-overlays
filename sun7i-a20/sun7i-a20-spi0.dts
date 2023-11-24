@@ -16,8 +16,8 @@
 		__overlay__ {
 			status = "okay";
 			pinctrl-names = "default", "default";
-			pinctrl-0 = <&spi0_pins_a>;
-			pinctrl-1 = <&spi0_cs0_pins_a>;
+			pinctrl-0 = <&spi0_pi_pins>;
+			pinctrl-1 = <&spi0_cs0_pi_pin>;
 		};
 	};
 };
