@@ -13,7 +13,7 @@
 
 			spidev@0 {
 				reg = <0>; /* Chip Select 0 */
-				compatible = "spidev";
+				compatible = "armbian, spi-dev";
 				spi-max-frequency = <1000000>;
 				status = "okay";
 			};
@@ -29,7 +29,7 @@
 
 			spidev@0 {
 				reg = <0>; /* Chip Select 0 */
-				compatible = "spidev";
+				compatible = "armbian,spi-dev";
 				spi-max-frequency = <1000000>;
 				status = "okay";
 			};
