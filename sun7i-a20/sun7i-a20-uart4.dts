@@ -7,7 +7,7 @@
 	fragment@0 {
 		target-path = "/aliases";
 		__overlay__ {
-			serial4 = "/soc@01c00000/serial@01c29000";
+			serial4 = "/soc/serial@01c29000";
 		};
 	};
 
@@ -15,7 +15,7 @@
 		target = <&uart4>;
 		 __overlay__ {
 			pinctrl-names = "default";
-			pinctrl-0 = <&uart4_pins_a>;
+			pinctrl-0 = <&uart4_ph_pins>;
 			status = "okay";
 		};
 	};

@@ -8,9 +8,9 @@
 		target = <&spi0>;
 		__overlay__ {
 			pinctrl-names = "default", "default", "default";
-			pinctrl-0 = <&spi0_pins_a>;
-			pinctrl-1 = <&spi0_cs0_pins_a>;
-			pinctrl-2 = <&spi0_cs1_pins_a>;
+			pinctrl-0 = <&spi0_pi_pins>;
+			pinctrl-1 = <&spi0_cs0_pi_pin>;
+			pinctrl-2 = <&spi0_cs1_pi_pin>;
 		};
 	};
 };
