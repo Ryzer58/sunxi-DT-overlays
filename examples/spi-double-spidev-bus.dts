@@ -5,6 +5,14 @@
 	compatible = "allwinner,sun4i-a10", "allwinner,sun7i-a20", "allwinner,sun8i-h3", "allwinner,sun50i-a64", "allwinner,sun50i-h5";
 
 	fragment@0 {
+		target-path = "/aliases";
+		__overlay__ {
+			spi0 = "/soc/spi@01c05000";
+			spi2 = "/soc/spi@01c17000";
+		};
+	};
+
+	fragment@1 {
 		target = <&spi0>;
 		__overlay__ {
 			#address-cells = <1>;
@@ -13,15 +21,17 @@
 
 			spidev@0 {
 				reg = <0>; /* Chip Select 0 */
-				compatible = "armbian, spi-dev";
+				compatible = "armbian,spi-dev";
+				pinctrl-names="default";
+				pinctrl-0=<&spi0_pi_pins>;
 				spi-max-frequency = <1000000>;
 				status = "okay";
 			};
 		};
 	};
 
-	fragment@1 {
-		target = <&spi1>;
+	fragment@2 {
+		target = <&spi2>;
 		__overlay__ {
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -30,6 +40,8 @@
 			spidev@0 {
 				reg = <0>; /* Chip Select 0 */
 				compatible = "armbian,spi-dev";
+				pinctrl-names="default";
+				pinctrl-0=<&spi2_pc_pins>;
 				spi-max-frequency = <1000000>;
 				status = "okay";
 			};
