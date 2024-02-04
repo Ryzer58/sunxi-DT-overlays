@@ -24,7 +24,7 @@
 
 			spidev@1 {
 				reg = <1>; /* Chip Select 1 */
-				compatible = "armbina,spi-dev";
+				compatible = "armbian,spi-dev";
 				spi-max-frequency = <1000000>;
 				pinctrl-names="default";
 				pinctrl-0=<&spi0_cs1_pi_pin>
