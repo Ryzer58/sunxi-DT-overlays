@@ -1,0 +1,75 @@
+/dts-v1/;
+/plugin/;
+
+/{
+
+    compatible = "allwinner,sun4i-a10", "allwinner,sun7i-a20", "allwinner,sun8i-h3", "allwinner,sun50i-a64", "allwinner,sun50i-h5";
+
+    fragment@0 {
+
+        target = <&pio>;
+
+        __overlay__ {
+
+            spi0_pi_pins: spi0_pi_pins {
+                pins = "PI11", "PI12", "PI13";
+                function = "spi0";
+            };
+
+            cs0_pin: cs0_pin {
+                pins = "PH5";
+                function = "gpio_out";
+
+            };
+
+            cs1_pin: cs1_pin {
+                pins = "PH10";
+                function = "gpio_out";
+        
+            };
+
+        };
+
+    };
+
+    fragment@1 {
+
+        target = <&spi0>;
+
+        __overlay__ {
+
+            /* needed to avoid dtc warning */
+            #address-cells = <1>;
+            #size-cells = <0>;
+            pinctrl-names= "default";
+            pinctrl-0 = <&spi0_pi_pins>;
+            spi-max-frequency = <1000000>;
+            status="okay";
+            cs-gpios = <&pio 7 5 0>,<&pio 7 10 0>;
+            num-chipselects = <2>;
+
+            spidev@0 {
+
+                compatible = "armbian,spi-dev";
+                reg = <0>;
+                pinctrl-names = "default";
+                pinctrl-0 = <&cs0_pin>;
+                status = "okay";
+            };
+
+            spidev@1 {
+
+                compatible = "armbian,spi-dev";
+                reg = <1>;
+                pinctrl-names = "default";
+                pinctrl-0 = <&cs1_pin>;
+                status = "okay";
+            };
+
+        };
+
+    };
+
+};
+
+    

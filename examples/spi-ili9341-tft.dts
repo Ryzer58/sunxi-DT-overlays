@@ -1,0 +1,83 @@
+/dts-v1/;
+/plugin/;
+/{
+
+    compatible = "allwinner,sun4i-a10", "allwinner,sun7i-a20", "allwinner,sun8i-h3", "allwinner,sun50i-a64", "allwinner,sun50i-h5";
+    
+	fragment@0 {
+
+	    target = <&pio>;	
+	    __overlay__{
+	
+	        display_pins: display_pins {
+                pins = "PB2", "PI3";
+                function = "gpio_out", "gpio_out";
+            };
+
+            backlight_pin: backlight_pin {
+                pins = "PH7";
+                function = "gpio_out";
+            };
+        };
+    };
+
+	fragment@1 {
+
+        target = <&spi0>;
+        __overlay__ {
+
+            /* needed to avoid dtc warning */
+            #address-cells = <1>;
+            #size-cells = <0>;
+            status="okay";
+            pinctrl-names = "default";
+            pinctrl-0 = <&spi0_pi_pins>; /* Mux the PI to make sure they are set in spi Mode*/
+            cs-gpios = <&pio 1 2 0>; /* PB2 (D5) - Linksprite shield TFT CS pin */
+            num-chipselects = <1>;
+
+            display: display@0 {
+
+                compatible = "adafruit,yx240qv29", "ilitek,ili9341";
+                pinctrl-names = "default";
+                pinctrl-0 = <&displaygi_pins>;
+                reg = <0>;
+                spi-max-frequency = <24000000>;
+                rotation = <270>;
+                bgr = <0>;
+                fps = <15>;
+                buswidth = <8>;
+                height = <240>;
+                width = <320>;
+                reset-gpios = <&pio 7 10 0>; /* PH10 (D8) */
+                dc-gpios = <&pio 8 3 0>; /* PI3 (D6) - Data control pin */
+                debug = <3>;
+
+            };
+        };
+    };
+
+    fragment@2 {
+        target-path = "/";
+		__overlay__ {
+			leds: leds@0 {
+				compatible = "gpio-leds";
+				pinctrl-names = "default";
+				pinctrl-0 = <&backlight_pin>;
+				status = "okay";
+
+				led: led {
+			            label = "lcd_backlight";
+				    gpios = <&pio 7 9 0>;
+			            default-on;
+				};
+			};
+		};
+    };
+
+    __overrides__ {
+		rotate =  <&display>,"rotate:0";
+		fps =     <&display>,"fps:0";
+		debug =   <&display>,"debug:0";
+    };
+
+};
