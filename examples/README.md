@@ -10,11 +10,19 @@ Compared to the other ones in this repository these are "standalone" - no fixup 
 - may require activating the SPI buses by a kernel provided overlay (i.e. `overlays=spi0 spi1`) to set pin muxing and bus aliases
 
 
-#### double-spidev-cs.dts
+#### double-spidev-hw-cs.dts / double-spidev-sw-cs.dts
 - overlay for 2 SPIdev devices on 1 SPI bus
 - may require activating the SPI bus by a kernel provided overlay (i.e. `overlays=spi0`) to set pin muxing and bus aliases
 - requires using SPI bus that supports multiple chip selects (including software/GPIO based ones)
 - requires `spi-add-cs1` overlay on H3 and H5
+
+
+#### spi-ili9341-tft.dts
+- overlay for driving the ili9341 connected to the SPI bus based around the 2.4 inch Linksprite
+display
+- bindings documentation: [ili9341.yaml](https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/Documentation/devicetree/bindings/display/panel/ilitek,ili9341.yaml)
+- Although written for this display it can easily be customised to work with any ili9341 driven
+display, simple change the height and width parameters to suite your particular display
 
 
 #### gpio-button.dts
@@ -22,6 +30,14 @@ Compared to the other ones in this repository these are "standalone" - no fixup 
 - bindings documentation: [gpio-keys.txt](https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/tree/Documentation/devicetree/bindings/input/gpio-keys.txt), [gpio-keys-polled.txt](https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git/tree/Documentation/devicetree/bindings/input/gpio-keys-polled.txt)
 - internal pull-up is optional and not recommended unless using short wires
 - requires adding `poll-interval` property if using "gpio-keys-polled" driver
+
+
+#### i2c-ad799x.dts
+- overlay for the adc breakout board for the Pcduino based around the ad799x connected to the
+I2C bus
+- bindings documentation: [ad799x.yaml](https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/Documentation/devicetree/bindings/iio/adc/adi,ad799x.yaml)
+- may require activating the I2C bus by a kernel provided overlay (i.e. `overlays=i2c1`) to set pin muxing
+- may require add a voltage reference 'vref', depending on the particular chip used
 
 
 #### i2c-apds9960.dts
@@ -57,6 +73,12 @@ Compared to the other ones in this repository these are "standalone" - no fixup 
 - may require changing the `compatible` property value
 - may require changing the `reg` property value to the actual address of the chip
 - may require changing the interrupt GPIO specifier
+
+#### i2c-pca9685.dts
+- overlay for the NXP PCA9685 I2C PWM controller connected to the I2C bus
+- bindings documentation: [pca9685-pwm.txt](https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/Documentation/devicetree/bindings/pwm/nxp,pca9685-pwm.txt)
+- may require activating the I2C bus by a kernel provided overlay (i.e. `overlays=i2c0`) to set pin muxing
+- may require changing the `reg` property value to the actual address of the chip
 
 
 #### sht1x.dts
