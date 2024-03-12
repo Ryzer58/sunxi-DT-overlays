@@ -1,0 +1,67 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "allwinner,sun4i-a10", "allwinner,sun7i-a20", "allwinner,sun8i-h3", "allwinner,sun50i-a64", "allwinner,sun50i-h5";
+
+	fragment@0 {
+		target = <&pio>;
+		__overlay__ {
+			lvds_panel: lvds_panel {
+				pins = "PD10", "PD11", "PD12", "PD13",
+                "PD14", "PD15", "PD16", "PD17", "PD18", "PD19";
+				function = "lcd0";
+			};
+		};
+	};
+
+	fragment@1 {
+		/* Not sure if the display driver supports more than one output at a time
+         * so disable the hdmi output just to be on the safe side
+         */
+        target = <&hdmi>;
+		__overlay__ {
+			status = "disabled"
+		};
+	};
+
+    fragment@2 {
+        target = <&tcon1_out>;
+		__overlay__ {
+			tcon0_out_panel: endpoint@0 {
+				reg = <0>;
+				remote-endpoint = <&panel_in_tcon1>;
+			};
+		};
+
+    };
+
+    fragment@3 {
+        target-path = "/";
+		__overlay__ {
+            backlight: backlight {
+				compatible = "pwm-backlight";
+				pwms = <&pwm 0 50000 1>;
+				brightness-levels = <0 10 20 30 40 50 60 70 80 90 100>;
+				default-brightness-level = <10>;
+			};
+
+			panel {
+				pinctrl-names = "default";
+				pinctrl-0 = <&lvds_panel>;
+
+				compatible = "olimex,lcd-olinuxino-10";
+				status = "okay";
+
+				enable-gpios = <&pio 7 8 0>;
+				backlight = <&backlight>;
+
+				port {
+					panel_in_tcon0: endpoint {
+						remote-endpoint = <&tcon0_out_panel>;
+					};
+				};
+			};
+		};
+    };
+};
