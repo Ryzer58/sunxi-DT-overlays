@@ -10,6 +10,8 @@
 	 * this example is for I2C1 on H3
 	 * NOTE: setting time at boot by the kernel
 	 * may not work in some cases if the external RTC module is loaded too late
+	 * Supports multiple rtc modules, see bindings for details
+	 
 	 */
 	fragment@0 {
 		target-path = "/aliases";
