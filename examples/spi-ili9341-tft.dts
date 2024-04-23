@@ -39,7 +39,7 @@
 
                 compatible = "adafruit,yx240qv29", "ilitek,ili9341";
                 pinctrl-names = "default";
-                pinctrl-0 = <&displaygi_pins>;
+                pinctrl-0 = <&display_pins>;
                 reg = <0>;
                 spi-max-frequency = <24000000>;
                 rotation = <270>;
