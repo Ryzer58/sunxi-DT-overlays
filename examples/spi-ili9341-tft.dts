@@ -9,13 +9,22 @@
 	    target = <&pio>;	
 	    __overlay__{
 	
-	        display_pins: display_pins {
-                pins = "PB2", "PI3";
-                function = "gpio_out", "gpio_out";
+	        display_dc: display_dc {
+                pins ="PI3";
+                function = "gpio_out";
+            };
+
+            display_cs: display_cs {
+                pins = "PB2";
+                function = "gpio_out"
+            };
+
+            sd_card_cs: sd_card_cs {
+                pins = "PH8";
             };
 
             backlight_pin: backlight_pin {
-                pins = "PH7";
+                pins = "PH9";
                 function = "gpio_out";
             };
         };
@@ -30,6 +39,7 @@
             #address-cells = <1>;
             #size-cells = <0>;
             status="okay";
+            
             pinctrl-names = "default";
             pinctrl-0 = <&spi0_pi_pins>; /* Mux the PI to make sure they are set in spi Mode*/
             cs-gpios = <&pio 1 2 0>; /* PB2 (D5) - Linksprite shield TFT CS pin */
@@ -39,7 +49,7 @@
 
                 compatible = "adafruit,yx240qv29", "ilitek,ili9341";
                 pinctrl-names = "default";
-                pinctrl-0 = <&display_pins>;
+                pinctrl-0 = <&display_dc>;
                 reg = <0>;
                 spi-max-frequency = <24000000>;
                 rotation = <270>;
