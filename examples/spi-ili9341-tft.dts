@@ -40,8 +40,11 @@
             #size-cells = <0>;
             status="okay";
             
-            pinctrl-names = "default";
+            /* If using a soft chip select rather than hardware it is easier to define the pins here
+            and not enable spi overlay seperately */
+            pinctrl-names = "default", "default";
             pinctrl-0 = <&spi0_pi_pins>; /* Mux the PI to make sure they are set in spi Mode*/
+            pinctrl-1 = <&display_cs>;
             cs-gpios = <&pio 1 2 0>; /* PB2 (D5) - Linksprite shield TFT CS pin */
             num-chipselects = <1>;
 
@@ -58,7 +61,10 @@
                 buswidth = <8>;
                 height = <240>;
                 width = <320>;
+                
+                /* Not all modules feature a dedicated reset line so disable if not used */
                 reset-gpios = <&pio 7 10 0>; /* PH10 (D8) */
+                
                 dc-gpios = <&pio 8 3 0>; /* PI3 (D6) - Data control pin */
                 debug = <3>;
 
