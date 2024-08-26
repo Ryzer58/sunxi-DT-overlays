@@ -179,16 +179,16 @@ SPI 1 pins (MOSI, MISO, SCK, CS0): PI18, PI19, PI17, PI16
 
 Activates SPI controller 2 to use it with other overlays and sets up the pin multiplexing for it
 
-SPI 2 pins a (MOSI, MISO, SCK, CS0): PC21, PC22, PC20, PC19
 SPI 2 pins b (MOSI, MISO, SCK, CS0): PB16, PB17, PB15, PB14
+SPI 2 pins c (MOSI, MISO, SCK, CS0): PC21, PC22, PC20, PC19
 
 Parameters:
 
 param_spi2_bus_pins (char)
 	SPI bus 2 pinmux variant
 	Optional
-	Default: a
-	Supported values: a, b
+	Default: c
+	Supported values: b, c
 	Determines what pins SPI bus 2 is exposed on if SPI 2 is used
 
 ### spi-add-cs1
@@ -205,8 +205,8 @@ supported by the kernel SPI NOR driver
 
 SPI 0 pins (MOSI, MISO, SCK, CS0, CS1): PI12, PI13, PI11, PI10, PI14
 SPI 1 pins (MOSI, MISO, SCK, CS0): PI18, PI19, PI17, PI16
-SPI 2 pins a (MOSI, MISO, SCK, CS0): PC21, PC22, PC20, PC19
 SPI 2 pins b (MOSI, MISO, SCK, CS0): PB16, PB17, PB15, PB14
+SPI 2 pins c (MOSI, MISO, SCK, CS0): PC21, PC22, PC20, PC19
 
 Parameters:
 
@@ -235,8 +235,8 @@ where X is the bus number and Y is the CS number
 
 SPI 0 pins (MOSI, MISO, SCK, CS0, CS1): PI12, PI13, PI11, PI10, PI14
 SPI 1 pins (MOSI, MISO, SCK, CS0): PI18, PI19, PI17, PI16
-SPI 2 pins a (MOSI, MISO, SCK, CS0): PC21, PC22, PC20, PC19
 SPI 2 pins b (MOSI, MISO, SCK, CS0): PB16, PB17, PB15, PB14
+SPI 2 pins c (MOSI, MISO, SCK, CS0): PC21, PC22, PC20, PC19
 
 Parameters:
 
@@ -276,16 +276,16 @@ param_uart2_rtscts (bool)
 
 Activates serial port 3 (/dev/ttyS3)
 
-UART 3 pins a (TX, RX, RTS, CTS): PG6, PG7, PG8, PG9
-UART 3 pins b (TX, RX, RTS, CTS): PH0, PH1, PH2, PH3
+UART 3 pins g (TX, RX, RTS, CTS): PG6, PG7, PG8, PG9
+UART 3 pins h (TX, RX, RTS, CTS): PH0, PH1, PH2, PH3
 
 Parameters:
 
 param_uart3_pins (char)
 	Determines what pins UART 3 is exposed on
 	Optional
-	Default: a
-	Supported values: a, b
+	Default: g
+	Supported values: g, h
 
 param_uart3_rtscts (bool)
 	Enable RTS and CTS pins
@@ -297,22 +297,29 @@ param_uart3_rtscts (bool)
 
 Activates serial port 4 (/dev/ttyS4)
 
-UART 4 pins a (TX, RX): PG10, PG11
-UART 4 pins b (TX, RX): PH4, PH5
+UART 4 pins g (TX, RX): PG10, PG11
+UART 4 pins h (TX, RX): PH4, PH5
 
 Parameters:
 
 param_uart4_pins (char)
 	Determines what pins UART 4 is exposed on
 	Optional
-	Default: a
-	Supported values: a, b
+	Default: g
+	Supported values: g, h
 
 ### uart 5
 
 Activates serial port 5 (/dev/ttyS5)
 
-UART 5 pins (TX, RX): PH6, PH7
+UART 5 pins h (TX, RX): PH6, PH7
+UART 5 pins i (TX, RX): PI10, PI11
+
+param_uart4_pins (char)
+	Determines what pins UART 4 is exposed on
+	Optional
+	Default: g
+	Supported values: g, h
 
 ### uart 6
 
