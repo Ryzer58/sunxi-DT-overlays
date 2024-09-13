@@ -16,12 +16,15 @@
 
             display_cs: display_cs {
                 pins = "PB2";
-                function = "gpio_out"
+                function = "gpio_out";
             };
 
-            sd_card_cs: sd_card_cs {
+	    /* Not currently used (WIP) */
+		
+	    /* sd_card_cs: sd_card_cs {
                 pins = "PH8";
-            };
+		function = "gpio_out";
+            }; */
 
             backlight_pin: backlight_pin {
                 pins = "PH9";
@@ -40,12 +43,13 @@
             #size-cells = <0>;
             status="okay";
             
-            /* If using a soft chip select rather than hardware it is easier to define the pins here
-            and not enable spi overlay seperately */
+            /* Either define hardware spi pins in a seperate overlay or define them here. When dealing with software rather than native chip select
+	    lines it is easier to define used pins here */
+
             pinctrl-names = "default", "default";
             pinctrl-0 = <&spi0_pi_pins>; /* Mux the PI to make sure they are set in spi Mode*/
             pinctrl-1 = <&display_cs>;
-            cs-gpios = <&pio 1 2 0>; /* PB2 (D5) - Linksprite shield TFT CS pin */
+            cs-gpios = <&pio 1 2 0>; /* PB2 (D5) - Linksprite shield TFT CS pin. If using the SD card we will also need to define an additional cs pin */
             num-chipselects = <1>;
 
             display: display@0 {
