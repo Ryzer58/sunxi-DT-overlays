@@ -19,11 +19,11 @@
                 function = "gpio_out";
             };
 
-	    /* Not currently used (WIP) */
+	        /* Not currently used (WIP) */
 		
-	    /* sd_card_cs: sd_card_cs {
+	        /* sd_card_cs: sd_card_cs {
                 pins = "PH8";
-		function = "gpio_out";
+		        function = "gpio_out";
             }; */
 
             backlight_pin: backlight_pin {
@@ -44,7 +44,7 @@
             status="okay";
             
             /* Either define hardware spi pins in a seperate overlay or define them here. When dealing with software rather than native chip select
-	    lines it is easier to define used pins here */
+	        lines it is easier to define used pins here */
 
             pinctrl-names = "default", "default";
             pinctrl-0 = <&spi0_pi_pins>; /* Mux the PI to make sure they are set in spi Mode*/
@@ -67,7 +67,7 @@
                 width = <320>;
                 
                 /* Not all modules feature a dedicated reset line so disable if not used */
-                reset-gpios = <&pio 7 10 0>; /* PH10 (D8) */
+                /* reset-gpios = <&pio 7 10 0>; */ /* PH10 (D8) */
                 
                 dc-gpios = <&pio 8 3 0>; /* PI3 (D6) - Data control pin */
                 debug = <3>;
