@@ -87,8 +87,8 @@
 
 				led: led {
 			            label = "lcd_backlight";
-				    gpios = <&pio 7 9 0>;
-			            default-on;
+				        gpios = <&pio 7 9 0>;
+			            default-state = "on";
 				};
 			};
 		};
